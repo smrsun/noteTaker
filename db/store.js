@@ -2,7 +2,7 @@ const util = require('util');
 const fs = require('fs');
 const readFromFile = util.promisify(fs.readFile);
 const writeToFile = util.promisify(fs.writeFile);
-const uuid = require('uuid');
+const uuid = require("uuid/v1")
 
 class Store {
   read() {
@@ -15,6 +15,10 @@ class Store {
   getNotes() {
     console.log('hi');
     return this.read();
+    //make sure to parse throgh the notes 
+    //CONCAT notes to the parsed notes
+    //because if notes isnt an aray or cant be turned into one send back an empty array
+    //return the parsed notes
   }
 
   addNote(note) {
