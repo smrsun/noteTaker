@@ -8,21 +8,20 @@ class Store {
   read() {
     return readFromFile('db/db.json', 'utf8');
   }
- write(note) {
-   writeToFile('db/db.json', JSON.stringify(note));
+  write(note) {
+    writeToFile('db/db.json', JSON.stringify(note));
   }
 
   getNotes() {
-    return this.read()
-    .then((notes) => {
+    return this.read().then((notes) => {
       let parsedNotes;
-      
+
       try {
         parsedNotes = [].concat(JSON.parse(notes));
-       } catch (err) {
+      } catch (err) {
         parsedNotes = [];
-       }
-       return parsedNotes;
+      }
+      return parsedNotes;
     });
   }
 
@@ -34,7 +33,7 @@ class Store {
     }
     const newNote = { title, text, id: uuid() };
     console.log('new note:', newNote);
-    this.getNotes()
+    return this.getNotes()
       .then((notes) => [...notes, newNote])
       .then((updatedNotes) => this.write(updatedNotes))
       .then(() => newNote);
